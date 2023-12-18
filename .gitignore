@@ -14,8 +14,19 @@ ProductMicroService/*.iml
 ProductMicroService/*.ipr
 
 
+UsersMicroService/target/
+UsersMicroService/site/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 
-
+UsersMicroService/.idea/modules.xml
+UsersMicroService/.idea/jarRepositories.xml
+UsersMicroService/.idea/compiler.xml
+UsersMicroService/.idea/libraries/
+UsersMicroService/*.iws
+UsersMicroService/*.iml
+UsersMicroService/*.ipr
 
 
 
