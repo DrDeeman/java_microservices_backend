@@ -1,0 +1,35 @@
+ProductMicroService/target/
+ProductMicroService/site/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+ProductMicroService/.idea/modules.xml
+ProductMicroService/.idea/jarRepositories.xml
+ProductMicroService/.idea/compiler.xml
+ProductMicroService/.idea/libraries/
+ProductMicroService/*.iws
+ProductMicroService/*.iml
+ProductMicroService/*.ipr
+
+
+
+
+
+
+
+SpringCloudMicroService/target/
+SpringCloudMicroService/site/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+SpringCloudMicroService/.idea/modules.xml
+SpringCloudMicroService/.idea/jarRepositories.xml
+SpringCloudMicroService/.idea/compiler.xml
+SpringCloudMicroService/.idea/libraries/
+SpringCloudMicroService/*.iws
+SpringCloudMicroService/*.iml
+SpringCloudMicroService/*.ipr
