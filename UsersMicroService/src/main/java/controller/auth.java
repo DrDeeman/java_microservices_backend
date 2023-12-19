@@ -7,11 +7,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/")
@@ -24,9 +22,12 @@ public class auth {
     public eUsers getAuth(HttpSession session)throws UserNotFoundException{
         Integer id_user = (Integer)session.getAttribute("user");
         eUsers user = this.dUsers.getUser(id_user);
-        System.out.println(user);
-        if(user == null)throw new UserNotFoundException();
         return user;
+    }
+
+    @GetMapping(value="/logout")
+    public void logout(HttpSession session){
+        session.setAttribute("user",null);
     }
 
 
@@ -36,11 +37,8 @@ public class auth {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         eUsers user = this.dUsers.getUser(login,password);
-        if(user!=null) {
-            session.setAttribute("user", user.getId());
-            return user;
-        }else throw new UserNotFoundException(login,password);
-
+        session.setAttribute("user", user.getId());
+        return user;
         }
 
     }

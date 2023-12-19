@@ -20,14 +20,11 @@ public class TestSpringBootApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
         return application.sources(TestSpringBootApplication.class);
     }
 
     public static void main(String[] args) {
         SpringApplication.run(TestSpringBootApplication.class, args);
-        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationContextConfiguration.class);
-
     }
 
 

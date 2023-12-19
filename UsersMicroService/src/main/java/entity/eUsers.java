@@ -2,7 +2,12 @@ package entity;
 // Generated 18 дек. 2023 г., 14:10:30 by Hibernate Tools 3.2.2.GA
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -22,10 +27,15 @@ public class eUsers  implements java.io.Serializable {
     @Column(name="name")
     private String name;
     @Column(name="login")
+    @NotBlank(message = "Name not found")
     private String login;
     @Column(name="password")
+    @NotBlank(message = "Password not found")
+    @Size(min = 8, message="Password too short")
     private String password;
     @Column(name="email")
+    @NotBlank(message = "Email not found")
+    @Pattern(regexp="[\\w\\d]*?@\\w*\\.(?>ru|com)", message="Email not valid")
     private String email;
 
     public eUsers() {
@@ -61,13 +71,15 @@ public class eUsers  implements java.io.Serializable {
     }
     
     public void setLogin(String login) {
+
         this.login = login;
+        this.name = login;
     }
 
     public String getPassword() {
         return this.password;
     }
-    
+
     public void setPassword(String password) {
         this.password = password;
     }
