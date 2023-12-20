@@ -8,7 +8,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
@@ -17,7 +24,7 @@ import static jakarta.persistence.GenerationType.SEQUENCE;
  */
 @Entity
 @Table(name="users")
-public class eUsers  implements java.io.Serializable {
+public class eUsers  implements UserDetails, java.io.Serializable {
 
     @Id
     @Column(name="id", nullable=false, columnDefinition="serial")
@@ -47,7 +54,39 @@ public class eUsers  implements java.io.Serializable {
        this.password = password;
        this.email = email;
     }
-   
+
+    @Override
+    public String getUsername() {
+        return this.name;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities(){
+        List<eRoles> arr = new ArrayList<>();
+        arr.add(new eRoles());
+        return arr;
+    }
 
     public int getId() {
         return this.id;
@@ -76,6 +115,7 @@ public class eUsers  implements java.io.Serializable {
         this.name = login;
     }
 
+    @Override
     public String getPassword() {
         return this.password;
     }

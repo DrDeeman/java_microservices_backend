@@ -18,7 +18,7 @@ public class UsersAdvice {
     public ResponseEntity<List<String>> handleException(UserNotFoundException ex){
         List<String> arr = new ArrayList<>(1);
         arr.add(ex.getMessage());
-        return new ResponseEntity<>(arr,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(arr,HttpStatus.UNAUTHORIZED);
     }
 
 
