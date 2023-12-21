@@ -3,6 +3,8 @@ package entity;
 
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +34,7 @@ public class eUsers  implements UserDetails, java.io.Serializable {
     @SequenceGenerator(name="users_seq", sequenceName="users_id_seq", allocationSize=10)
      private int id;
     @Column(name="name")
+    @JsonIgnore
     private String name;
     @Column(name="login")
     @NotBlank(message = "Name not found")
@@ -56,32 +59,38 @@ public class eUsers  implements UserDetails, java.io.Serializable {
     }
 
     @Override
+    @JsonIgnore
     public String getUsername() {
         return this.name;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
 
 
     @Override
+    @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities(){
         List<eRoles> arr = new ArrayList<>();
         arr.add(new eRoles());
@@ -116,6 +125,7 @@ public class eUsers  implements UserDetails, java.io.Serializable {
     }
 
     @Override
+    @JsonIgnore
     public String getPassword() {
         return this.password;
     }

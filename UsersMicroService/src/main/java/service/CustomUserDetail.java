@@ -21,8 +21,7 @@ public class CustomUserDetail implements UserDetailsService {
         try(Session session = this.factory.openSession()) {
             Query<eUsers> q = session.createQuery("from eUsers where login = :l", eUsers.class);
             q.setParameter("l", login);
-            eUsers user = q.getSingleResult();
-            return user;
+            return q.getSingleResult();
         }catch(NoResultException ex){
             throw new UsernameNotFoundException("User for login:"+login+" not found");
         }

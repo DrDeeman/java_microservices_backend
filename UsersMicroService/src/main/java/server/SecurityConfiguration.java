@@ -1,6 +1,7 @@
 package server;
 
 
+import entity.eUsers;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,6 +16,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -33,7 +36,10 @@ public class SecurityConfiguration{
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        return http
+
+        return http.logout(logout->logout.logoutSuccessHandler(
+                        (req,res,auth)->res.setStatus(HttpStatus.OK.value())
+                ))
                 .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(
                 (authorize)->authorize.requestMatchers("/login").permitAll()
@@ -63,6 +69,7 @@ public class SecurityConfiguration{
         authProvider.setPasswordEncoder(plainPasswordEncoder());
         return new ProviderManager(authProvider);
     }
+
 
 
 

@@ -17,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import service.CustomUserDetail;
 
+import java.security.Principal;
+
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
 @RestController
@@ -36,15 +38,10 @@ public class auth {
     }
 
     @GetMapping(value="/auth")
-    public eUsers getAuth(HttpSession session)throws UserNotFoundException{
-        //Integer id_user = (Integer)session.getAttribute("user");
-        SecurityContextHolder.setContext((SecurityContext)session.getAttribute("SPRING_SECURITY_CONTEXT"));
+    public eUsers getAuth()throws UserNotFoundException{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(this.authManager.authenticate(auth).isAuthenticated());
-        System.out.println("test name "+auth.getName());
-        System.out.println(auth.getPrincipal());
+        return (eUsers)auth.getPrincipal();
 
-        return null;
     }
 
     @GetMapping(value="/logout")
