@@ -31,6 +31,7 @@ public class DAOUsers {
         }
     }
 
+
     public eUsers getUser(Integer id) {
         if(id==null) throw new UserNotFoundException();
         try(Session session = this.factory.openSession()) {

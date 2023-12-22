@@ -20,13 +20,16 @@ public class UsersAdvice {
         List<String> arr = new ArrayList<>(1);
         arr.add(ex.getMessage());
 
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+
         if(ex instanceof UserNotFoundException)
-            return new ResponseEntity<>(arr,HttpStatus.UNAUTHORIZED);
+            status = HttpStatus.UNAUTHORIZED;
 
         if(ex instanceof BadCredentialsException)
-            return new ResponseEntity<>(arr,HttpStatus.BAD_REQUEST);
+            status = HttpStatus.BAD_REQUEST;
 
-        return new ResponseEntity<>(arr,HttpStatus.INTERNAL_SERVER_ERROR);
+
+        return new ResponseEntity<>(arr,status);
     }
 
 

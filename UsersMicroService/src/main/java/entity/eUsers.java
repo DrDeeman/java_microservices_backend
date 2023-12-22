@@ -42,6 +42,7 @@ public class eUsers  implements UserDetails, java.io.Serializable {
     @Column(name="password")
     @NotBlank(message = "Password not found")
     @Size(min = 8, message="Password too short")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     @Column(name="email")
     @NotBlank(message = "Email not found")
@@ -125,7 +126,6 @@ public class eUsers  implements UserDetails, java.io.Serializable {
     }
 
     @Override
-    @JsonIgnore
     public String getPassword() {
         return this.password;
     }
