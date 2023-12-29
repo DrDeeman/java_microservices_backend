@@ -58,14 +58,19 @@ public class SecurityConfiguration{
         return NoOpPasswordEncoder.getInstance();
     }
 
+    /*
     @Bean UserDetailsService customService(){
         return new CustomUserDetail();
     }
+    */
 
+
+    @Autowired
+    CustomUserDetail cud;
     @Bean
     public AuthenticationManager authenticationManager(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(customService());
+        authProvider.setUserDetailsService(this.cud);
         authProvider.setPasswordEncoder(plainPasswordEncoder());
         return new ProviderManager(authProvider);
     }

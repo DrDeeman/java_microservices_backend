@@ -19,8 +19,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         @ComponentScan(basePackages = "service"),
         @ComponentScan(basePackages = "DAO")
 })
-@EntityScan(basePackages = "entity")
 @EnableJpaRepositories(basePackages = "repository")
+@EntityScan(basePackages = "entity")
 public class TestSpringBootApplication extends SpringBootServletInitializer {
 
     @Override

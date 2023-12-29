@@ -1,6 +1,9 @@
 package DAO;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import exception.UserNotFoundException;
 import jakarta.persistence.NoResultException;
 import org.hibernate.Session;
@@ -10,7 +13,8 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import entity.eUsers;
-import java.util.List;
+import service.KafkaProducer;
+
 
 @Repository
 public class DAOUsers {
@@ -18,6 +22,14 @@ public class DAOUsers {
 
     @Autowired
     SessionFactory factory;
+
+    @Autowired
+    ObjectMapper mapper;
+
+    @Autowired
+    KafkaProducer kp;
+
+
 
     public eUsers getUser(String login, String password) throws NoResultException {
         try(Session session = this.factory.openSession()) {
@@ -46,11 +58,22 @@ public class DAOUsers {
     }
 
 
-    public void addUser(eUsers user){
+    public void addUser(eUsers user) throws JsonProcessingException {
+
         Session session = this.factory.openSession();
         Transaction tr = session.beginTransaction();
         session.persist(user);
         tr.commit();
         session.close();
+
+
+        ObjectNode dataForTopic = this.mapper.createObjectNode();
+        ObjectNode u = this.mapper.createObjectNode();
+        u.put("login",user.getLogin());
+        u.put("password",user.getPassword());
+        u.put("email",user.getEmail());
+        dataForTopic.put("user",u);
+
+        kp.sendMessage( this.mapper.writeValueAsString(dataForTopic),"messages");
     }
 }
