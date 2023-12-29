@@ -62,6 +62,8 @@ public class ApplicationContextConfiguration {
         configProps.put(
                 ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class);
+        configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG,true);
+        configProps.put(ProducerConfig.ACKS_CONFIG,"all");
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 

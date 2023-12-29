@@ -34,7 +34,7 @@ public class KafkaProducer {
             System.out.println("start send...");
             try {
                 Thread.sleep(10000);
-                kafkaTemplate.send(topic, message);
+                kafkaTemplate.send(topic, message);//Для обработки результата отправки просмотри https://reflectoring.io/spring-boot-kafka/
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
