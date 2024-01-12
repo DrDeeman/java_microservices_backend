@@ -3,9 +3,13 @@ package server;
 import entity.*;
 import jakarta.persistence.EntityManagerFactory;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +21,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.ProducerListener;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -50,7 +55,7 @@ public class ApplicationContextConfiguration {
     private String bootstrapAddress;
 
     @Bean
-    @Scope("singleton")
+    @Scope("prototype")
     public ProducerFactory<String, String> producerFactory(){
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(
@@ -70,7 +75,8 @@ public class ApplicationContextConfiguration {
 
     @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+        KafkaTemplate<String,String>kt = new KafkaTemplate<>(producerFactory());
+        return kt;
     }
 
 

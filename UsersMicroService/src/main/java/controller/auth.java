@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import service.CustomUserDetail;
+import service.KafkaProducer;
 
 import java.security.Principal;
 
@@ -23,6 +24,7 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
 
 @RestController
 public class auth {
+
 
 
     private final AuthenticationManager authManager;
@@ -47,6 +49,7 @@ public class auth {
     @PostMapping(value="/login")
     public eUsers login(@RequestBody LoginRequest lr, HttpSession session)
     throws UserNotFoundException{
+
         System.out.println("start auth");
         Authentication authReq = new UsernamePasswordAuthenticationToken(lr.login(),lr.password());
         Authentication auth = this.authManager.authenticate(authReq);
