@@ -36,7 +36,7 @@ public class eUsers  implements UserDetails, java.io.Serializable {
     @Column(name="name")
     @JsonIgnore
     private String name;
-    @Column(name="login")
+    @Column(name="login", unique = true)
     @NotBlank(message = "Name not found")
     private String login;
     @Column(name="password")
@@ -131,6 +131,7 @@ public class eUsers  implements UserDetails, java.io.Serializable {
     }
 
     public void setPassword(String password) {
+
         this.password = password;
     }
 

@@ -11,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import entity.eUsers;
 import service.KafkaProducer;
@@ -28,6 +29,9 @@ public class DAOUsers {
 
     @Autowired
     KafkaProducer kp;
+
+    @Autowired
+    BCryptPasswordEncoder encoder;
 
 
 
@@ -59,6 +63,8 @@ public class DAOUsers {
 
 
     public void addUser(eUsers user) throws JsonProcessingException {
+
+        user.setPassword(this.encoder.encode(user.getPassword()));
 
         Session session = this.factory.openSession();
         Transaction tr = session.beginTransaction();
