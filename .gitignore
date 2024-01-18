@@ -44,3 +44,20 @@ SpringCloudMicroService/.idea/libraries/
 SpringCloudMicroService/*.iws
 SpringCloudMicroService/*.iml
 SpringCloudMicroService/*.ipr
+
+
+
+KafkaConsumerSender/target/
+KafkaConsumerSender/site/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+KafkaConsumerSender/.idea/modules.xml
+KafkaConsumerSender/.idea/jarRepositories.xml
+KafkaConsumerSender/.idea/compiler.xml
+KafkaConsumerSender/.idea/libraries/
+KafkaConsumerSender/*.iws
+KafkaConsumerSender/*.iml
+KafkaConsumerSender/*.ipr
