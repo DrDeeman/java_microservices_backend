@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +17,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +28,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import service.CustomUserDetail;
+import service.JwtAuthenticationFilter;
 
 import java.io.IOException;
 
@@ -35,6 +39,8 @@ import java.io.IOException;
 @EnableWebSecurity
 public class SecurityConfiguration{
 
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthFilter;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
@@ -43,8 +49,21 @@ public class SecurityConfiguration{
                 ))
                 .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(
-                (authorize)->authorize.requestMatchers("/login").permitAll()
-                        .anyRequest().authenticated()
+                (authorize)-> {
+                    try {
+                        authorize.requestMatchers("/login").permitAll()
+                                .anyRequest().authenticated()
+                                .and()
+                                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//disable http sessions
+                                .and()
+                                .authenticationManager(this.authenticationManager())
+                                .addFilterBefore(this.jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+
+
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
         )
                 .exceptionHandling(customizer-> customizer
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
@@ -72,6 +91,7 @@ public class SecurityConfiguration{
     @Autowired
     CustomUserDetail cud;
     @Bean
+    @Scope("prototype")
     public AuthenticationManager authenticationManager(){
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(this.cud);

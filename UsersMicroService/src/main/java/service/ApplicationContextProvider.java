@@ -1,4 +1,4 @@
-package server;
+package service;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;

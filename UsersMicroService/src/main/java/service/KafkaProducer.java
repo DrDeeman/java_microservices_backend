@@ -10,7 +10,7 @@ import org.springframework.core.ResolvableType;
 import org.springframework.kafka.support.ProducerListener;
 import org.springframework.stereotype.Service;
 import org.springframework.kafka.core.KafkaTemplate;
-import server.ApplicationContextProvider;
+
 
 @Service
 public class KafkaProducer {

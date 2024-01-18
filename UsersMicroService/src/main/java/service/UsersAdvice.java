@@ -2,6 +2,7 @@ package service;
 
 import exception.*;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import org.apache.coyote.Response;
 import org.postgresql.util.PSQLException;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -20,7 +21,12 @@ import java.util.regex.Matcher;
 @ControllerAdvice
 public class UsersAdvice {
 
-    @ExceptionHandler({DataIntegrityViolationException.class,UserNotFoundException.class,BadCredentialsException.class, InternalAuthenticationServiceException.class})
+    @ExceptionHandler({
+            DataIntegrityViolationException.class,
+            UserNotFoundException.class,
+            BadCredentialsException.class,
+            InternalAuthenticationServiceException.class
+    })
     public ResponseEntity<List<String>> handleException(Exception ex){
         List<String> arr = new ArrayList<>(1);
 

@@ -1,12 +1,17 @@
 package controller;
 
+import DAO.DAOJwt;
 import DAO.DAOUsers;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import entity.eUsers;
 import exception.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,8 +19,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import service.CustomUserDetail;
+import service.JwtService;
 import service.KafkaProducer;
 
 import java.security.Principal;
@@ -25,7 +32,11 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
 @RestController
 public class auth {
 
+    @Autowired
+    private DAOJwt dao;
 
+    @Autowired
+    ObjectMapper mapper;
 
     private final AuthenticationManager authManager;
 
@@ -45,18 +56,33 @@ public class auth {
 
     }
 
+    @GetMapping(value="/refresh_token")
+    public ResponseEntity<String> refreshToken() throws JsonProcessingException {
+        return new ResponseEntity<>(this.mapper.writeValueAsString(this.dao.getTokens()),HttpStatus.OK);
+    }
+
     public record LoginRequest(String login, String password){}
     @PostMapping(value="/login")
-    public eUsers login(@RequestBody LoginRequest lr, HttpSession session)
-    throws UserNotFoundException{
+    public ResponseEntity<String> login(@RequestBody LoginRequest lr, HttpSession session)
+            throws UserNotFoundException, JsonProcessingException {
 
         System.out.println("start auth");
         Authentication authReq = new UsernamePasswordAuthenticationToken(lr.login(),lr.password());
         Authentication auth = this.authManager.authenticate(authReq);
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(auth);
+        UserDetails user = (UserDetails) auth.getPrincipal();
+        ObjectNode body = this.dao.getTokens();
+        ObjectNode tree = this.mapper.valueToTree(user);
+        body.set("dataUser",tree);
+        return new ResponseEntity<>(this.mapper.writeValueAsString(body),HttpStatus.OK);
+
+        /*
+
         session.setAttribute("SPRING_SECURITY_CONTEXT",sc);
        return (eUsers)auth.getPrincipal();
+       */
+
         }
 
     }
