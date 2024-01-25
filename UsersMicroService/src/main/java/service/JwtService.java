@@ -22,8 +22,8 @@ public class JwtService {
     @Value(value = "${jwt.secret}")
     private String secret;
 
-    private final static int timeRefreshToken = 30000;//86400000;
-    private final static int timeAccessToken = 10000;//300000;
+    private final static int timeRefreshToken = 86400000;
+    private final static int timeAccessToken = 300000;
 
 
 

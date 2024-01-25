@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,8 +27,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Autowired
     private JwtService jwt;
 
-    @Autowired
-    private Logger logger;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private CustomUserDetail cud;
@@ -59,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     }catch(ExpiredJwtException e) {
         res.setStatus(HttpStatus.BAD_REQUEST.value());
-        res.setHeader("Content-type","application/text");
+        res.setHeader("Content-type","text/plain");
         res.getWriter().write("Jwt token expired");
     }
 

@@ -1,36 +1,21 @@
 package server;
 
-import entity.*;
-import jakarta.persistence.EntityManagerFactory;
+
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
-import org.springframework.kafka.support.ProducerListener;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
-import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
-
+import service.CustomPartitioner;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:application.properties")
@@ -67,17 +52,15 @@ public class ApplicationContextConfiguration {
                 StringSerializer.class);
         configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG,true);
         configProps.put(ProducerConfig.ACKS_CONFIG,"all");
+        configProps.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,CustomPartitioner.class);
+
         return new DefaultKafkaProducerFactory<>(configProps);
     }
 
+
+
     @Bean
     @Scope("prototype")
-    public Logger getLogger(){
-        return LoggerFactory.getLogger(this.getClass());
-    }
-
-
-    @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
         KafkaTemplate<String,String>kt = new KafkaTemplate<>(producerFactory());
         return kt;

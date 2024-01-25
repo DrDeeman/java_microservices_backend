@@ -21,12 +21,10 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import service.CustomUserDetail;
-import service.JwtService;
+
+import records.DataProfile;
 import service.KafkaProducer;
-
-import java.security.Principal;
-
+import records.LoginRequest;
 import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
 
 @RestController
@@ -38,17 +36,36 @@ public class auth {
     @Autowired
     ObjectMapper mapper;
 
+    @Autowired
+    KafkaProducer kp;
+
+    @Autowired
+    DAOUsers dUsers;
+
+
+
     private final AuthenticationManager authManager;
 
     public auth(AuthenticationManager authenticationManager) {
         this.authManager = authenticationManager;
     }
 
-    @GetMapping(value="/auth")
-    public eUsers getAuth()throws UserNotFoundException{
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return (eUsers)auth.getPrincipal();
 
+    @GetMapping(value="/auth")
+    public eUsers getAuth() throws UserNotFoundException, JsonProcessingException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        eUsers user =  (eUsers)auth.getPrincipal();
+        return user;
+
+    }
+
+    @PatchMapping(value="/auth")
+    public eUsers editProfile(@RequestBody DataProfile data){
+        System.out.println("Start edit");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        eUsers user = (eUsers)auth.getPrincipal();
+        this.dUsers.editUser(user,data);
+        return user;
     }
 
     @GetMapping(value="/logout")
@@ -61,7 +78,7 @@ public class auth {
         return new ResponseEntity<>(this.mapper.writeValueAsString(this.dao.getTokens()),HttpStatus.OK);
     }
 
-    public record LoginRequest(String login, String password){}
+
     @PostMapping(value="/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest lr, HttpSession session)
             throws UserNotFoundException, JsonProcessingException {

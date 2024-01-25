@@ -10,8 +10,7 @@ import server.TestSpringBootApplication;
 @SpringBootTest(classes = TestSpringBootApplication.class)
 public class KafkProducerTest {
 
-  @Mock
-  private KafkaTemplate<String,String> kt;
+
 
   @Test
     public void sendMessage_test(){}

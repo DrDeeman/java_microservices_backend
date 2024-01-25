@@ -29,10 +29,14 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import service.CustomUserDetail;
 import service.JwtAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 
 @Configuration
@@ -44,14 +48,13 @@ public class SecurityConfiguration{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 
-        return http.logout(logout->logout.logoutSuccessHandler(
+         http.logout(logout->logout.logoutSuccessHandler(
                         (req,res,auth)->res.setStatus(HttpStatus.OK.value())
                 ))
-                .csrf(csrf->csrf.disable())
                 .authorizeHttpRequests(
                 (authorize)-> {
                     try {
-                        authorize.requestMatchers("/login").permitAll()
+                        authorize.requestMatchers("/login").permitAll().requestMatchers("/test").permitAll()
                                 .anyRequest().authenticated()
                                 .and()
                                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//disable http sessions
@@ -68,9 +71,11 @@ public class SecurityConfiguration{
                 .exceptionHandling(customizer-> customizer
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 )
-                .build();
+                 .cors().and().csrf().disable();
+        return http.build();
 
     }
+
 
 
     @Bean

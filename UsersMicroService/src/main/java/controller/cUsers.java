@@ -7,12 +7,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import DAO.DAOUsers;
 import entity.eUsers;
 import exception.EntityException;
+import records.DataProfile;
+
 import java.util.List;
 
 @RestController
@@ -22,6 +26,9 @@ public class cUsers {
 
     @Autowired
     DAOUsers dUsers;
+
+
+
 @PostMapping(value="/")
 public ResponseEntity<String> createUser(@Valid @RequestBody eUsers user, BindingResult valid_result)
         throws JsonProcessingException, EntityException{
@@ -30,9 +37,11 @@ public ResponseEntity<String> createUser(@Valid @RequestBody eUsers user, Bindin
     this.dUsers.addUser(user);
 
     MultiValueMap<String, String> headers = new HttpHeaders();
-    headers.add("Content-type","application/text");
+    headers.add("Content-type","text/plain");
     return new ResponseEntity<>("User created",headers,HttpStatus.OK);
    }
+
+
 
 
 }

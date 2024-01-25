@@ -4,6 +4,7 @@ package DAO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import exception.EntityException;
 import exception.UserNotFoundException;
 import jakarta.persistence.NoResultException;
 import org.hibernate.Session;
@@ -14,6 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import entity.eUsers;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.SmartValidator;
+import records.DataProfile;
+import service.ApplicationContextProvider;
 import service.KafkaProducer;
 
 
@@ -32,6 +38,7 @@ public class DAOUsers {
 
     @Autowired
     BCryptPasswordEncoder encoder;
+
 
 
 
@@ -64,7 +71,8 @@ public class DAOUsers {
 
     public void addUser(eUsers user) throws JsonProcessingException {
 
-        user.setPassword(this.encoder.encode(user.getPassword()));
+        String plainPassword = user.getPassword();
+        user.setPassword(this.encoder.encode(plainPassword));
 
         Session session = this.factory.openSession();
         Transaction tr = session.beginTransaction();
@@ -73,13 +81,33 @@ public class DAOUsers {
         session.close();
 
 
-        ObjectNode dataForTopic = this.mapper.createObjectNode();
+
         ObjectNode u = this.mapper.createObjectNode();
         u.put("login",user.getLogin());
-        u.put("password",user.getPassword());
+        u.put("password",plainPassword);
         u.put("email",user.getEmail());
-        dataForTopic.put("user",u);
 
-        kp.sendMessage( this.mapper.writeValueAsString(dataForTopic),"messages");
+
+        kp.sendMessage( this.mapper.writeValueAsString(u),"messages");
+    }
+
+
+    public void editUser(eUsers user, DataProfile data){
+          System.out.println("start edit");
+        user.setEmail(data.email());
+          SmartValidator validator = ApplicationContextProvider.getApplicationContext().getBean(SmartValidator.class);
+          DataBinder binder = new DataBinder(user);
+          binder.setValidator(validator);
+          binder.validate();
+          BindingResult valid_result = binder.getBindingResult();
+          if(valid_result.hasErrors())
+              throw new EntityException(valid_result.getAllErrors());
+
+          Session session = this.factory.openSession();
+          Transaction tr = session.beginTransaction();
+          session.merge(user);
+          tr.commit();
+          session.close();
+
     }
 }
