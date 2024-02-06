@@ -47,7 +47,7 @@
         <configuration>
           <finalName>app</finalName>
           <outputDirectory>site</outputDirectory>
-          <mainClass>server.TestSpringBootApplication</mainClass>
+          <mainClass>server.SpringBootApp</mainClass>
           <layout>JAR</layout>
         </configuration>
         <executions>

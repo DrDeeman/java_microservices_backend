@@ -1,4 +1,4 @@
 FROM openjdk:17-jdk-alpine
 
-ADD SpringCloudMicroService/site/app.jar app.jar
+ADD ./SpringCloudMicroService/site/app.jar app.jar
 CMD ["java", "-jar","app.jar"]

@@ -54,7 +54,8 @@ public class SecurityConfiguration{
                 .authorizeHttpRequests(
                 (authorize)-> {
                     try {
-                        authorize.requestMatchers("/login").permitAll().requestMatchers("/test").permitAll()
+                        authorize
+                                .requestMatchers("/login","/index.html","/scripts/*","/assets/images/*","/remote*").permitAll()
                                 .anyRequest().authenticated()
                                 .and()
                                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//disable http sessions
@@ -68,6 +69,7 @@ public class SecurityConfiguration{
                     }
                 }
         )
+
                 .exceptionHandling(customizer-> customizer
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 )

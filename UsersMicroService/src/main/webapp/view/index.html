@@ -1,20 +1,2 @@
-<html>
-<head>
-
-</head>
-<body>
-<script>
-    fetch("/auth");
-
-    setTimeout(
-    ()=>{
-    fetch('/login',{
-    method:"POST",
-    headers:{"Content-type":"application/x-www-form-urlencoded"},
-    body:"login=demo&password=demo1"
-    }).then(r=>r.json())
-    .then(r=>console.log(r));
-    },2000);
-</script>
-</body>
-</html>
+<html><head>
+</head><body><div id="root"></div><script src="scripts/app.js"></script></body></html>

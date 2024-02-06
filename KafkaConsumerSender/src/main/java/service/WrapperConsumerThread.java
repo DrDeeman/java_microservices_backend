@@ -22,23 +22,28 @@ public class WrapperConsumerThread {
     @Autowired
     private ConsumerFactory<String, String> factory;
 
+    private final AtomicInteger all_count_thread = new AtomicInteger(0);
+
     public void run(){
         new Thread(new ConsumerThread()).start();
     }
+
     private class ConsumerThread implements Runnable {
 
-        private AtomicInteger all_count_threads = new AtomicInteger(0);
+
         private final int number;
         private final Logger logger = LoggerFactory.getLogger(ConsumerThread.class);
 
-        public ConsumerThread() {
-            this.number = all_count_threads.incrementAndGet();
-            }
-
-
+         ConsumerThread(){
+             number = all_count_thread.incrementAndGet();
+         }
         @Override
         public void run() {
-            logger.info("Start consumer "+ Integer.toString(number));
+
+                  logger.info("Start consumer " + Integer.toString(number));
+
+
+
             EmailSender sender = ApplicationContextProvider.getApplicationContext().getBean(EmailSender.class);
 
             Consumer<String, String> consumer = null;
@@ -53,6 +58,7 @@ public class WrapperConsumerThread {
                     ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 
                     for (ConsumerRecord<String, String> record : records) {
+
                         rUser user = new Gson().fromJson(record.value(),rUser.class);
                         sender.sendSimpleEmail(
                                 user.email(),

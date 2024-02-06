@@ -40,9 +40,14 @@ public class SpringCloudContextConfiguration {
         return builder.routes()
                 .route(r->r.path("/products_api/**")
                         .filters(f->f.rewritePath(
-                                "/products_api/(?<segment>.*)","/app/${segment}"
+                                "/products_api/(?<segment>.*)","/products/${segment}"
                         ))
-                        .uri("http://172.16.238.5:8080"))
+                        .uri("http://172.16.238.22:8080"))
+                .route(r->r.path("/users_api/**")
+                        .filters(f->f.rewritePath(
+                                "/users_api/(?<segment>.*)","/users/${segment}"
+                        ))
+                        .uri("http://172.16.238.12:8080"))
                 .build();
     }
 

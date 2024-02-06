@@ -67,7 +67,7 @@ public class UsersAdvice {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleOtherException(Exception ex){
-        return new ResponseEntity<>("Has been wrong",HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Has been wrong:"+ ex.getMessage(),HttpStatus.BAD_REQUEST);
     }
 
 
