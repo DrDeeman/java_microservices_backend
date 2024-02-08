@@ -19,8 +19,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
 import org.springframework.validation.SmartValidator;
 import records.DataProfile;
+import records.TestCustomRecord;
+import repository.CustomizedUsersCrudRepository;
 import service.ApplicationContextProvider;
 import service.KafkaProducer;
+
+import java.util.List;
 
 
 @Repository
@@ -39,19 +43,20 @@ public class DAOUsers {
     @Autowired
     BCryptPasswordEncoder encoder;
 
+    @Autowired
+    CustomizedUsersCrudRepository rep;
 
 
 
-    public eUsers getUser(String login, String password) throws NoResultException {
-        try(Session session = this.factory.openSession()) {
-            Query<eUsers> q = session.createQuery("from eUsers where login=:l and password=:p", eUsers.class);
-            q.setParameter("l", login);
-            q.setParameter("p", password);
-            eUsers user = q.getSingleResult();
-            return user;
-        }catch(NoResultException ex){
-            throw new UserNotFoundException(login,password);
-        }
+
+
+
+    public eUsers getUser(String login) {
+        return rep.getCustomUserByLogin(login);
+    }
+
+    public List<TestCustomRecord> getUserByGroupEmail(){
+        return rep.getListGroupEmail();
     }
 
 

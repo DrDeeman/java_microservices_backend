@@ -14,7 +14,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import repository.eUsersRepository;
+import repository.CustomizedUsersCrudRepository;
+
 
 import java.util.NoSuchElementException;
 
@@ -25,7 +26,7 @@ public class CustomUserDetail implements UserDetailsService {
     private SessionFactory factory;
 
     @Autowired
-    private eUsersRepository rep;
+    private CustomizedUsersCrudRepository rep;
     @Override
     public UserDetails loadUserByUsername(String login) throws  UserNotFoundException {
 

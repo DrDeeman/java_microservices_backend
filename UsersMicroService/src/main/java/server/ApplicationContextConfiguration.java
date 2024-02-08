@@ -83,7 +83,7 @@ public class ApplicationContextConfiguration {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://172.16.238.10:5432/users");
+        dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/users");
         dataSource.setUsername("postgres");
         dataSource.setPassword("postgres");
 

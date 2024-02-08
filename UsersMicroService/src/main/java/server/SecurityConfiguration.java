@@ -113,7 +113,7 @@ public class SecurityConfiguration{
 
     @Bean
     public WebSecurityCustomizer ignoreResources(){
-        return (webSecurity) -> webSecurity.ignoring().requestMatchers("/users/");
+        return (webSecurity) -> webSecurity.ignoring().requestMatchers("/users/").and().ignoring().requestMatchers("/test/*");
     }
 
 

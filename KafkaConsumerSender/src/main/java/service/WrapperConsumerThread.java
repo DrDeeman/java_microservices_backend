@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.stereotype.Service;
 import records.rUser;
+import server.SpringBootApp;
 
 import java.time.Duration;
 import java.util.Date;
@@ -39,7 +40,6 @@ public class WrapperConsumerThread {
          }
         @Override
         public void run() {
-
                   logger.info("Start consumer " + Integer.toString(number));
 
 
