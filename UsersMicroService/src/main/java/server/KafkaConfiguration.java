@@ -3,8 +3,6 @@ package server;
 
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -18,8 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@PropertySource("classpath:application.properties")
-public class ApplicationContextConfiguration {
+public class KafkaConfiguration {
 
 
 /*
@@ -65,35 +62,5 @@ public class ApplicationContextConfiguration {
         KafkaTemplate<String,String>kt = new KafkaTemplate<>(producerFactory());
         return kt;
     }
-
-
-
-    @Bean(name="entityManagerFactory")
-    @Primary
-    public LocalSessionFactoryBean sessionFactory() {
-        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("entity");
-        return sessionFactory;
-    }
-
-
-
-    @Bean
-    public DataSource dataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/users");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("postgres");
-
-        return dataSource;
-    }
-
-
-
-
-
-
 
 }

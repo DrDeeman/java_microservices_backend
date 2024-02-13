@@ -1,4 +1,4 @@
-package server;
+package App;
 
 
 import org.springframework.boot.SpringApplication;
@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScans({
         @ComponentScan(basePackages = "controller"),
         @ComponentScan(basePackages = "service"),
+        @ComponentScan(basePackages = "server"),
         @ComponentScan(basePackages = "DAO")
 })
 @EnableJpaRepositories(basePackages = "repository")

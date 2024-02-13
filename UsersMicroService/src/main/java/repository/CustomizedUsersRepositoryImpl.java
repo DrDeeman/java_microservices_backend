@@ -21,11 +21,10 @@ public class CustomizedUsersRepositoryImpl implements CustomizedUsersRepository 
     @PersistenceContext
     EntityManager emi;
 
-    private final JdbcTemplate jdbc;
+    @Autowired
+    JdbcTemplate jdbc;
 
-    public CustomizedUsersRepositoryImpl(JdbcTemplate jdbc){
-        this.jdbc = jdbc;
-    }
+
 
 
     @Override
