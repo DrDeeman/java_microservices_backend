@@ -14,19 +14,36 @@ ProductMicroService/*.iml
 ProductMicroService/*.ipr
 
 
-UsersMicroService/target/
-UsersMicroService/site/
+AuthMicroService/target/
+AuthMicroService/site/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-UsersMicroService/.idea/modules.xml
-UsersMicroService/.idea/jarRepositories.xml
-UsersMicroService/.idea/compiler.xml
-UsersMicroService/.idea/libraries/
-UsersMicroService/*.iws
-UsersMicroService/*.iml
-UsersMicroService/*.ipr
+AuthMicroService/.idea/modules.xml
+AuthMicroService/.idea/jarRepositories.xml
+AuthMicroService/.idea/compiler.xml
+AuthMicroService/.idea/libraries/
+AuthMicroService/*.iws
+AuthMicroService/*.iml
+AuthMicroService/*.ipr
+
+
+
+UserMicroService/target/
+UserMicroService/site/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+UserMicroService/.idea/modules.xml
+UserMicroService/.idea/jarRepositories.xml
+UserMicroService/.idea/compiler.xml
+UserMicroService/.idea/libraries/
+UserMicroService/*.iws
+UserMicroService/*.iml
+UserMicroService/*.ipr
+
 
 
 

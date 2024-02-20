@@ -1,0 +1,73 @@
+version: '3.9'
+services:
+
+
+ db_auth:
+   image: postgres:13.3
+   container_name: service_postgres_auth
+   environment:
+     - POSTGRES_DB=postgres
+     - POSTGRES_USER=postgres
+     - POSTGRES_PASSWORD=postgres
+     - PGDATA=/var/lib/postgresql/data/pgdata
+   volumes:
+    - ./backups/:/docker-entrypoint-initdb.d/
+    - ~/pgdataAuthDocker:/var/lib/postgresql/data
+   networks:
+     web:
+       ipv4_address: 172.16.238.10
+   healthcheck:
+     test: ["CMD-SHELL", "pg_isready -U postgres -d users"]
+     interval: 10s
+     timeout: 5s
+     retries: 5
+   tty: true
+
+
+
+ pgadmin_auth:
+   user: root
+   container_name: service_pgadmin_auth
+   image: dpage/pgadmin4
+   environment:
+     PGADMIN_DEFAULT_EMAIL: "stalkerdrdeeman@gmail.com"
+     PGADMIN_DEFAULT_PASSWORD: "passwd"
+     PGADMIN_CONFIG_SERVER_MODE: "False"
+   volumes:
+     - /var/Docker_pgadmin:/var/lib/pgadmin
+   ports:
+     - "5052:80"
+   restart: unless-stopped
+   deploy:
+     resources:
+       limits:
+         cpus: '0.5'
+         memory: 1G
+   networks:
+     web:
+       ipv4_address: 172.16.238.11
+   depends_on:
+     db_auth:
+       condition: service_healthy
+
+
+
+
+ spring_tomcat_auth:
+    image: tomcat:10.1.16-jdk17
+    volumes:
+      - ../site/app.war:/usr/local/tomcat/webapps/auth.war
+    ports:
+      - '8084:8080'
+    networks:
+         web:
+           ipv4_address: 172.16.238.12
+    depends_on:
+         db_auth:
+           condition: service_healthy
+
+
+
+networks:
+  web:
+    external: true

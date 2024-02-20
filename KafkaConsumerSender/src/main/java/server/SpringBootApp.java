@@ -80,15 +80,17 @@ public class SpringBootApp {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(SpringBootApp.class, args);
         WrapperConsumerThread wrapper = context.getBean(WrapperConsumerThread.class);
-        SpringBootApp p = new SpringBootApp();
+       /*
         new Thread(new TestThread()).start();
         count.countDown();
         new Thread(new TestThread()).start();
         count.countDown();
         new Thread(new TestThread()).start();
         count.countDown();
-        //wrapper.run();
-       // wrapper.run();
+        */
+
+        wrapper.run();
+        wrapper.run();
 
     }
 

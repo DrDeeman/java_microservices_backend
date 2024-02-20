@@ -83,7 +83,7 @@ services:
     command: |
       '
       kafka-topics --bootstrap-server broker1:9092 --create --if-not-exists --topic messages --replication-factor 2 --partitions 2 
-      kafka-configs --bootstrap-server localhost:9092 --entity-type topics --entity-name messages --alter --add-config      "segment.ms=86400000,segment.bytes=104857600,retention.ms=172800000,cleanup.policy=delete"
+      kafka-configs --bootstrap-server broker1:9092 --entity-type topics --entity-name messages --alter --add-config      "segment.ms=86400000,segment.bytes=104857600,retention.ms=172800000,cleanup.policy=delete"
       '
       
       
