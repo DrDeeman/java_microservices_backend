@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="entity.eProducts" table="products" >
+        <meta attribute="use-in-tostring">true</meta>
+        <meta attribute="use-in-equals">true</meta>
+        <meta attribute="use-in-hashcode">true</meta>
+        <id name="id" column="id" type="int">
+            <generator class="sequence">
+                <param name="sequence_name">products_id_seq</param>
+            </generator>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="price" column="price" type="big_decimal" precision="20" scale="2"/>
+        <property name="year_issue" column="year_issue" type="timestamp"/>
+        <property name="raiting" column="raiting" type="double"/>
+        <property name="path_image" column="page_image" type="string"/>
+    </class>
+</hibernate-mapping>

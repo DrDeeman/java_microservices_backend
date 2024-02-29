@@ -78,3 +78,24 @@ KafkaConsumerSender/.idea/libraries/
 KafkaConsumerSender/*.iws
 KafkaConsumerSender/*.iml
 KafkaConsumerSender/*.ipr
+
+
+
+UserProductsMicroService/target/
+UserProductsMicroService/site/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+UserProductsMicroService/.idea/modules.xml
+UserProductsMicroService/.idea/jarRepositories.xml
+UserProductsMicroService/.idea/compiler.xml
+UserProductsMicroService/.idea/libraries/
+UserProductsMicroService/*.iws
+UserProductsMicroService/*.iml
+UserProductsMicroService/*.ipr
+
+
+
+
