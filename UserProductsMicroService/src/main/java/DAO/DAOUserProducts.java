@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import repository.CustomizedUserProductsCrudRepository;
 
 @Service
@@ -27,6 +28,10 @@ public class DAOUserProducts {
         user.addProduct(product);
         rep.save(user);
       //  factory.getCurrentSession().persist(user);
+    }
+
+    public Flux<eUsers> getUsersByEmail(String mail){
+        return rep.searchByEmail(mail);
     }
 
 }
