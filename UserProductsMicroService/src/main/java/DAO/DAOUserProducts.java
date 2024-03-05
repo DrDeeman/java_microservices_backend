@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import repository.CustomizedUserProductsCrudRepository;
 
 @Service
@@ -21,6 +22,11 @@ public class DAOUserProducts {
     SessionFactory factory;
 
 
+    public Mono<eUsers> getUser(Integer id){
+       return  rep.searchById(id);
+    }
+
+
 
 
     //@Transactional
@@ -32,6 +38,11 @@ public class DAOUserProducts {
 
     public Flux<eUsers> getUsersByEmail(String mail){
         return rep.searchByEmail(mail);
+    }
+
+
+    public Flux<eUsers> getUsers(){
+        return rep.customFindAll();
     }
 
 }
