@@ -1,0 +1,33 @@
+apply plugin : "java"
+apply plugin: "application"
+apply plugin : 'scala'
+apply plugin : "org.openjfx.javafxplugin" version "0.1.0"
+
+mainClassName = "app.Main"
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+   version = "11.0.2"
+   modules = [ 'javafx.controls' ]
+}
+
+sourceSets.main.scala.srcDir "src/main/java"
+sourceSets.test.scala.srcDir "src/test/java"
+sourceSets.main.java.srcDirs = ["/main/java"]
+sourceSets.test.java.srcDirs = ["/test/java"]
+
+dependencies {
+    implementation 'org.scala-lang:scala-library:2.13.12'
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
