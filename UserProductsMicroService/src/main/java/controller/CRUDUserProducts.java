@@ -1,28 +1,19 @@
 package controller;
 
-import CustomAnnotation.TestMethodAnnotation;
-import CustomAnnotation.Validators.TestAnnotationValidator;
-import DAO.DAOUserProducts;
+import dao.DAOUserProducts;
 import entity.eProducts;
 import entity.eUsers;
 import exception.EntityFieldException;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
-import jakarta.validation.executable.ValidateOnExecution;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
-import org.springframework.validation.SmartValidator;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import service.ApplicationContextProvider;
 
 import java.util.Optional;
-import java.util.Set;
 
 @Validated
 @RestController
