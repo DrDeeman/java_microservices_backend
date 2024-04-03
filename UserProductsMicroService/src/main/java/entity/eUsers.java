@@ -2,8 +2,10 @@ package entity;
 // Generated 28 февр. 2024 г., 12:39:46 by Hibernate Tools 3.2.2.GA
 
 
+import CustomAnnotation.TestAnnotation;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +25,11 @@ public class eUsers  implements java.io.Serializable {
     @Column(name="id", nullable=false)
      private int id;
 
+    @TestAnnotation
     @Column(name="name")
      private String name;
 
+    @NotNull
     @Column(name="login")
      private String login;
 

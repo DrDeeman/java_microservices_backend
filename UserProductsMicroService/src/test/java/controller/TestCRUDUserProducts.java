@@ -28,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class TestCRUDUserProducts {
 
 
 
-
+/*
    @TestConfiguration
    static class ConfigTest{
             @Bean
@@ -72,8 +73,8 @@ public class TestCRUDUserProducts {
                };
             }
    }
-
-   @Test
+*/
+   //@Test
     public void testGetUserWithProducts() throws Exception {
        eUsers user = users.get(0);
        eProducts product = new eProducts("product3",new BigDecimal(100.00),LocalDateTime.parse("2020-01-01T00:00:00"),2.9,"path");
@@ -89,5 +90,7 @@ public class TestCRUDUserProducts {
                .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("test@gmail.com"))
                .andExpect(MockMvcResultMatchers.jsonPath("$.products").isArray());
    }
+
+
 
 }

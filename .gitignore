@@ -97,8 +97,7 @@ UserProductsMicroService/*.iml
 UserProductsMicroService/*.ipr
 
 
-testGradleScala/.idea/libraries
-testGradleScala/.gradle
+
 
 
 
