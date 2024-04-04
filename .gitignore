@@ -1,5 +1,4 @@
 ProductMicroService/target/
-ProductMicroService/site/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -15,7 +14,6 @@ ProductMicroService/*.ipr
 
 
 AuthMicroService/target/
-AuthMicroService/site/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -31,7 +29,6 @@ AuthMicroService/*.ipr
 
 
 UserMicroService/target/
-UserMicroService/site/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -48,7 +45,6 @@ UserMicroService/*.ipr
 
 
 SpringCloudMicroService/target/
-SpringCloudMicroService/site/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -65,7 +61,6 @@ SpringCloudMicroService/*.ipr
 
 
 KafkaConsumerSender/target/
-KafkaConsumerSender/site/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -82,7 +77,6 @@ KafkaConsumerSender/*.ipr
 
 
 UserProductsMicroService/target/
-UserProductsMicroService/site/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

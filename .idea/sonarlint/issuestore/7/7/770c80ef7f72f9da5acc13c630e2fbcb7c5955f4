@@ -1,0 +1,9 @@
+
+‡
+java:S1192:"FDefine a constant instead of duplicating this literal "test2" 4 times.(§è¶¥ÿÿÿÿÿJ$98fd06c3-ca47-478b-babd-c94dd25af001
+›
+java:S1192:"ZDefine a constant instead of duplicating this literal "stalkerdrdeeman@gmail.com" 3 times.(§è¶¥ÿÿÿÿÿJ$bda42a61-a7fa-477d-a27c-693ed2f8d365
+	java:S101*"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ªÏË¸ıÿÿÿÿJ$dbd7caff-d906-4399-baef-77bff43aa9db
+|
+java:S1612T"@Replace this lambda with method reference 'StringJoiner::merge'.(õø²ƒJ$ea11e74f-86f6-452d-96a8-4ab86d96d5a5
+‰	java:S100d"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(üú©šJ$8d48ec75-5ded-4c38-9859-025709f4b2c8

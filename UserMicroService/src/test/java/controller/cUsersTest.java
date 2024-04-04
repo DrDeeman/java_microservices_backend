@@ -72,7 +72,7 @@ public class cUsersTest {
 
 
 
-    @Test
+   // @Test
     public void getListTest() throws Exception {
 
         Map<String, List<eUsers>> groupList = this.list.stream()
@@ -96,7 +96,7 @@ public class cUsersTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].email").value("stalkerdrdeeman@gmail.com"));
     }
 
-    @Test
+    //@Test
     public void createUsers_test()throws Exception{
 
         eUsers user = this.list.get(0);

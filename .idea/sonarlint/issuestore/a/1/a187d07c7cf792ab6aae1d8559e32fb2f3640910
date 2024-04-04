@@ -1,0 +1,6 @@
+
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(şç»¶
+>
+java:S1068"(Remove this unused "name" private field.(Ë¥¼
+>
+java:S1068"(Remove this unused "imei" private field.(õŠñø

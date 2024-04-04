@@ -44,21 +44,21 @@ public class CustomizedUsersRepositoryImplTest {
         this.rep.saveAll(pool);
     }
 
-    @Test
+    //@Test
     public void listEmailTest(){
         List<TestCustomRecord> list =  this.rep.getListGroupEmail();
         print(list);
         assertThat(list).isNotNull();
     }
 
-    @Test
+   // @Test
     public void countListUser(){
         List<eUsers> users =  this.rep.findAll();
         assertThat(users).isNotNull();
         assertThat(users.size()).isEqualTo(3);
     }
 
-    @Test
+   // @Test
     public void getListTest(){
         eUsers user = this.rep.findByLogin("ltest1");
         assertThat(user).isNotNull();

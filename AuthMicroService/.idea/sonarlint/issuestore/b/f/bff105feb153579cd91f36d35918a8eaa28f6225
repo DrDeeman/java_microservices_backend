@@ -1,0 +1,50 @@
+
+`	java:S112D"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+X
+java:S6813."BRemove this field injection and use constructor injection instead.(êæÄŞ
+X
+java:S6813b"BRemove this field injection and use constructor injection instead.(êæÄŞ
+h
+java:S3305/"RInject this field value directly into "filterChain", the only method that uses it.(µø‹é
+r
+java:S3305c"\Inject this field value directly into "authenticationManager", the only method that uses it.(üõ°–
+R
+java:S16117"7Remove the parentheses around the "authorize" parameter(ßÓŠûÿÿÿÿÿ
+Q
+java:S1874U";Remove this use of "NoOpPasswordEncoder"; it is deprecated.(å‰ö
+2
+java:S1116Y"Remove this empty statement.(¨©¡¨
+V	java:S125\"<This block of commented-out lines of code should be removed.(ùÑÉ·ÿÿÿÿÿ
+Q	java:S125j"<This block of commented-out lines of code should be removed.(Äè˜×
+T
+java:S1611t"9Remove the parentheses around the "webSecurity" parameter(ÔõÁïüÿÿÿÿ
+E
+java:S1128"*Remove this unused import 'entity.eUsers'.(à¹äøùÿÿÿÿ
+S
+java:S1128"=Remove this unused import 'jakarta.servlet.ServletException'.(®Â­Ç
+Y
+java:S1128"DRemove this unused import 'jakarta.servlet.http.HttpServletRequest'.(õ3
+`
+java:S1128"ERemove this unused import 'jakarta.servlet.http.HttpServletResponse'.(ÂÓÕÇÿÿÿÿÿ
+q
+java:S1128"VRemove this unused import 'org.springframework.security.access.AccessDeniedException'.(Ú‚¾şÿÿÿÿ
+c
+java:S1128"MRemove this unused import 'org.springframework.security.core.Authentication'.(ñıÓ“
+r
+java:S1128"\Remove this unused import 'org.springframework.security.core.context.SecurityContextHolder'.(ŒÄæë
+l
+java:S1128"VRemove this unused import 'org.springframework.security.core.userdetails.UserDetails'.(ÊÁ¥
+s
+java:S1128"]Remove this unused import 'org.springframework.security.core.userdetails.UserDetailsService'.(¶…¥à
+s
+java:S1128"XRemove this unused import 'org.springframework.security.web.access.AccessDeniedHandler'.(½í•Îüÿÿÿÿ
+`
+java:S1128 "KRemove this unused import 'org.springframework.web.cors.CorsConfiguration'.(î¤·`
+l
+java:S1128!"QRemove this unused import 'org.springframework.web.cors.CorsConfigurationSource'.(ŒºÏøşÿÿÿÿ
+t
+java:S1128""YRemove this unused import 'org.springframework.web.cors.UrlBasedCorsConfigurationSource'.(µ²İûùÿÿÿÿ
+K
+java:S1128&"0Remove this unused import 'java.io.IOException'.(ªº»Úıÿÿÿÿ
+H
+java:S1128'"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ

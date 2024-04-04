@@ -1,0 +1,8 @@
+
+r
+java:S1488-"\Immediately return this expression instead of assigning it to the temporary variable "user".(ºø—ç
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(Èïî¯ùÿÿÿÿ
+œ
+java:S11864"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(˜þ”Ýûÿÿÿÿ
+@	java:S106B"+Replace this use of System.out by a logger.(®µ®€
+V	java:S125O"<This block of commented-out lines of code should be removed.(ê‡Ðùÿÿÿÿ
