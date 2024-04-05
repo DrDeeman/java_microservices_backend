@@ -1,9 +1,9 @@
 Для запуска всей системы необходимо:
 1)Запустить docker-compose up --build -d в корне java_microservices_backend
 2)В любом порядке запускать:
-    docker-compose up --build -d в корне AuthMicroService
-    docker-compose up --build -d в корне ProductMicroService
-    docker-compose up --build -d в корне UserMicroService
+    docker-compose up --build -d в корне AuthMicroService/docker
+    docker-compose up --build -d в корне ProductMicroService/docker
+    docker-compose up --build -d в корне UserMicroService/docker
     ** UserProductsMicroService в общей схеме не задействован **
 3)В домашней папке профиля появится 3 папки с бд для каждого из 3 не центральных микросервисов
 4) Доступ к сайту - http://127.0.0.1:8050/users_api/index.html - через шлюз.
